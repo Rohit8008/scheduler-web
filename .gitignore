@@ -1,0 +1,64 @@
+# IDEs
+.idea
+.vscode
+*.iml
+*.iws
+*.ipr
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Frontend (Next.js)
+node_modules/
+.next/
+out/
+build/
+dist/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Backend (Maven/Java)
+target/
+*.class
+*.jar
+*.war
+*.ear
+.classpath
+.project
+.settings/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Docker environment
+.env.docker
+
+# Firebase service account (NEVER commit this!)
+firebase-service-account.json
+*-firebase-adminsdk-*.json
+service-account*.json
+
+# Backend configuration with secrets
+scheduler-backend/src/main/resources/application.properties
+
+# Claude
+.claude/
+
+# Misc
+*.swp
+*.swo
+*~
+.cache/

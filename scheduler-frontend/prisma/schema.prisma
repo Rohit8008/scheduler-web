@@ -1,0 +1,105 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String        @id @default(uuid())
+  firebaseUid  String        @unique @map("firebase_uid")
+  email        String        @unique
+  username     String?       @unique
+  name         String?
+  imageUrl     String?       @map("image_url")
+  phoneNumber  String?       @map("phone_number")
+  events       Event[]       @relation("UserEvents")
+  bookings     Booking[]     @relation("UserBookings")
+  availability Availability?
+  createdAt    DateTime      @default(now()) @map("created_at")
+  updatedAt    DateTime      @updatedAt @map("updated_at")
+
+  @@map("user")
+}
+
+model Event {
+  id          String    @id @default(uuid())
+  title       String
+  description String?
+  duration    Int
+  userId      String    @map("user_id")
+  user        User      @relation("UserEvents", fields: [userId], references: [id])
+  bookings    Booking[]
+  isPrivate   Boolean   @default(true) @map("is_private")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  @@map("event")
+}
+
+model Booking {
+  id             String   @id @default(uuid())
+  eventId        String   @map("event_id")
+  event          Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  userId         String   @map("user_id")
+  user           User     @relation("UserBookings", fields: [userId], references: [id])
+  name           String
+  email          String
+  additionalInfo String?  @map("additional_info")
+  startTime      DateTime @map("start_time")
+  endTime        DateTime @map("end_time")
+  meetLink       String   @map("meet_link")
+  googleEventId  String   @map("google_event_id")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  @@map("booking")
+}
+
+model Availability {
+  id     String @id @default(uuid())
+  userId String @unique @map("user_id")
+  user   User   @relation(fields: [userId], references: [id])
+
+  days DayAvailability[]
+
+  timeGap Int @map("time_gap")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("availability")
+}
+
+model DayAvailability {
+  id             String       @id @default(uuid())
+  availabilityId String       @map("availability_id")
+  day            DayOfWeek
+  startTime      DateTime     @map("start_time")
+  endTime        DateTime     @map("end_time")
+
+  availability Availability @relation(fields: [availabilityId], references: [id], onDelete: Cascade)
+
+  @@map("day_availability")
+}
+
+enum DayOfWeek {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
+
+// npx prisma generate
+//npx prisma migrate dev 

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #10B981;
+        }
+        .header h1 {
+            color: #10B981;
+            margin: 0;
+            font-size: 24px;
+        }
+        .content {
+            padding: 20px 0;
+        }
+        .greeting {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .details {
+            background-color: #f9fafb;
+            border-left: 4px solid #10B981;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .detail-row {
+            margin: 10px 0;
+        }
+        .detail-label {
+            font-weight: 600;
+            color: #10B981;
+            display: inline-block;
+            width: 140px;
+        }
+        .meet-link {
+            display: inline-block;
+            background-color: #10B981;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin: 20px 0;
+            font-weight: 600;
+        }
+        .meet-link:hover {
+            background-color: #059669;
+        }
+        .footer {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            color: #6b7280;
+            font-size: 14px;
+        }
+        .attendee-box {
+            background-color: #f0fdf4;
+            border: 1px solid #86efac;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📅 New Booking Received!</h1>
+        </div>
+
+        <div class="content">
+            <p class="greeting">Hi <strong th:text="${creatorName}">Creator</strong>,</p>
+
+            <p>You have a new booking for your event "<strong th:text="${eventTitle}">Event Title</strong>".</p>
+
+            <div class="attendee-box">
+                <h3 style="margin-top: 0; color: #10B981;">Attendee Information</h3>
+                <div class="detail-row">
+                    <span class="detail-label">Name:</span>
+                    <strong th:text="${attendeeName}">Attendee Name</strong>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Email:</span>
+                    <span th:text="${attendeeEmail}">attendee@example.com</span>
+                </div>
+            </div>
+
+            <div class="details">
+                <h3 style="margin-top: 0; color: #10B981;">Meeting Details</h3>
+
+                <div class="detail-row">
+                    <span class="detail-label">Event:</span>
+                    <span th:text="${eventTitle}">Event Title</span>
+                </div>
+
+                <div class="detail-row">
+                    <span class="detail-label">Date:</span>
+                    <span th:text="${date}">Monday, January 1, 2024</span>
+                </div>
+
+                <div class="detail-row">
+                    <span class="detail-label">Time:</span>
+                    <span th:text="${startTime} + ' - ' + ${endTime}">10:00 AM - 11:00 AM</span>
+                </div>
+            </div>
+
+            <div class="attendee-box" th:if="${additionalInfo}">
+                <strong>Message from Attendee:</strong><br>
+                <span th:text="${additionalInfo}">Additional info</span>
+            </div>
+
+            <div style="text-align: center;">
+                <a th:href="${meetLink}" class="meet-link" target="_blank">
+                    Join Meeting
+                </a>
+            </div>
+
+            <p style="margin-top: 20px;">
+                <strong>What's next?</strong><br>
+                - The meeting has been added to your Google Calendar<br>
+                - You'll receive a calendar reminder before the meeting<br>
+                - Use the link above to join the meeting at the scheduled time
+            </p>
+        </div>
+
+        <div class="footer">
+            <p>This is an automated notification from Scheduler App.</p>
+            <p>Manage your bookings in your dashboard.</p>
+        </div>
+    </div>
+</body>
+</html>

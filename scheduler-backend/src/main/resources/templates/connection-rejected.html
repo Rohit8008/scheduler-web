@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #6B7280;
+        }
+        .header h1 {
+            color: #6B7280;
+            margin: 0;
+            font-size: 24px;
+        }
+        .content {
+            padding: 20px 0;
+        }
+        .greeting {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .details {
+            background-color: #f9fafb;
+            border-left: 4px solid #6B7280;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .detail-row {
+            margin: 10px 0;
+        }
+        .detail-label {
+            font-weight: 600;
+            color: #6B7280;
+            display: inline-block;
+            width: 140px;
+        }
+        .info-box {
+            background-color: #f9fafb;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .footer {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            color: #6b7280;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Connection Request Update</h1>
+        </div>
+
+        <div class="content">
+            <p class="greeting">Hi <strong th:text="${userName}">User</strong>,</p>
+
+            <p><strong th:text="${rejecterName}">Rejecter</strong> declined your connection request.</p>
+
+            <div class="details">
+                <h3 style="margin-top: 0; color: #6B7280;">Request Details</h3>
+
+                <div class="detail-row">
+                    <span class="detail-label">Declined by:</span>
+                    <span th:text="${rejecterName}">Rejecter Name</span>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <p style="margin: 0;"><strong>Note:</strong> This could be for various reasons. You can explore other connections on Scheduler to collaborate with others!</p>
+            </div>
+
+            <p>Continue using Scheduler to connect with other professionals and schedule meetings efficiently.</p>
+        </div>
+
+        <div class="footer">
+            <p>This is an automated notification from Scheduler App.</p>
+            <p>Thank you for using Scheduler!</p>
+        </div>
+    </div>
+</body>
+</html>
