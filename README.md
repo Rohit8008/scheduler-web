@@ -526,7 +526,7 @@ MIT License - see [LICENSE](LICENSE) for details
 ## Support
 
 For issues and questions:
-- [GitHub Issues](https://github.com/rohit8008/scheduler/issues)
+- [GitHub Issues](https://github.com/rohit8008/scheduler-web/issues)
 - Email: mittalrohit701@gmail.com
 
 ---
